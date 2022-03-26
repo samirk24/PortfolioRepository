@@ -5,6 +5,7 @@ import com.hackathon.hcldemo.model.OrderDetails;
 import com.hackathon.hcldemo.model.OrderRequest;
 import com.hackathon.hcldemo.service.OrderService;
 import com.hackathon.hcldemo.service.OrderServiceImpl;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -38,7 +39,7 @@ public class OrderControllerTest {
 
     @Test
     public void testAddOrderEntryForNullRequest(){
-        OrderRequest request = null;
+        OrderRequest request = Mockito.mock(OrderRequest.class);
         controller.addOrderEntry(request);
     }
 
