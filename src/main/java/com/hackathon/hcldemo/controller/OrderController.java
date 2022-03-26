@@ -91,7 +91,7 @@ public class OrderController {
         if(request.getSymbol()==null) {
             list.add("Invalid Security Name");
         }else{
-            /*List<Asset> assetList = null;
+            List<Asset> assetList = null;
             Asset[] assetArray = restTemplate.getForObject(appUri+ASSET_URI, Asset[].class);
             if(assetArray!=null && assetArray.length>0) {
                 assetList = Arrays.asList(assetArray);
@@ -106,7 +106,7 @@ public class OrderController {
                 if (assetFoundList == null || assetFoundList.isEmpty()) {
                     list.add("Invalid Security Name");
                 }
-            }*/
+            }
         }
         return list;
     }
