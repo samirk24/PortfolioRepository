@@ -49,6 +49,7 @@ public class OrderController {
                 List<String> validationList = validate(orderRequest);
                 if(!validationList.isEmpty()){
                     webResponse.setValidationMessage(validationList);
+                    webResponse.setHttpStatus(HttpStatus.UNPROCESSABLE_ENTITY.toString());
                     return new ResponseEntity<WebResponse>(webResponse, HttpStatus.UNPROCESSABLE_ENTITY);
                 }
                 OrderDetails orderDetails = orderService.addOrderEntry(orderRequest);
@@ -57,12 +58,15 @@ public class OrderController {
             } catch (Exception e) {
                 log.error("Error while adding Order Entry: {}", e.getMessage());
                 webResponse.setErrorMessage("Failed to place order");
+                webResponse.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR.toString());
                 return new ResponseEntity<WebResponse>(webResponse, HttpStatus.INTERNAL_SERVER_ERROR);
             }
+            webResponse.setHttpStatus(HttpStatus.OK.toString());
             return new ResponseEntity<WebResponse>(webResponse, HttpStatus.OK);
         }else {
             log.error("Invalid Order Request");
             webResponse.setErrorMessage("Invalid Order Request");
+            webResponse.setHttpStatus(HttpStatus.NO_CONTENT.toString());
             return new ResponseEntity<WebResponse>(webResponse, HttpStatus.NO_CONTENT);
         }
     }
@@ -91,7 +95,7 @@ public class OrderController {
         if(request.getSymbol()==null) {
             list.add("Invalid Security Name");
         }else{
-            List<Asset> assetList = null;
+            /*List<Asset> assetList = null;
             Asset[] assetArray = restTemplate.getForObject(appUri+ASSET_URI, Asset[].class);
             if(assetArray!=null && assetArray.length>0) {
                 assetList = Arrays.asList(assetArray);
@@ -106,7 +110,7 @@ public class OrderController {
                 if (assetFoundList == null || assetFoundList.isEmpty()) {
                     list.add("Invalid Security Name");
                 }
-            }
+            }*/
         }
         return list;
     }

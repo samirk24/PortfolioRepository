@@ -12,6 +12,7 @@ public class WebResponse<T> {
     private T data;
     private String errorMessage;
     private List<String> validationMessage;
+    private String httpStatus;
 
     public WebResponse() {
 
